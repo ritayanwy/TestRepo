@@ -15,8 +15,8 @@ TEST_ENV = {
     'domain': 'api-gamma.cloudmagic.com',
     'protocol': 'https',
     'testcases': [
-        'login.py',
-        'test1.py',
-        'test2.py',
+        'cases.login.py',
+        'cases.test1.py',
+        'cases.test2.py',
     ]
 }

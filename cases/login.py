@@ -18,8 +18,8 @@ TEST = {
                 'method': 'POST',
                 'url': '/k/v5/user/session_create',
                 'timeout': 60,
-                'data': {'email': 'XX@CC.com',
-                         'password': 'QQQQQQ'}
+                'data': {'email': 'anurag.shukla@webyog.com',
+                         'password': 'temp1234'}
         }
         ],
         'response': [
