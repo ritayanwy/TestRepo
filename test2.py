@@ -43,7 +43,7 @@ TEST = {
             },
             {
                 'status_code': 200,
-                'hooks': folderlist_handler
+                'hooks': sync_handler
             }
         ]
 }

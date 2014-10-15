@@ -1,4 +1,3 @@
-import requests
 
 
 def init_handler(global_headers, global_post_param, global_query_param):
