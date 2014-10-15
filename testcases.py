@@ -18,5 +18,6 @@ TEST_ENV = {
         'cases.login.py',
         'cases.test1.py',
         'cases.test2.py',
+        'cases.test3.py',
     ]
 }
