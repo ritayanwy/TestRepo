@@ -19,7 +19,7 @@ TEST = {
                 'url': '/k/v5/user/session_create',
                 'timeout': 60,
                 'data': {'email': 'anurag.shukla@webyog.com',
-                         'password': 'temp1234'}
+                         'password': 'AAXXAA'}
         }
         ],
         'response': [
