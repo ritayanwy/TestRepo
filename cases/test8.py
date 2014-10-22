@@ -13,7 +13,7 @@ def folderlist_handler(response):
     if len(res['data']['list']) > 0 and len(res['data']['list'][0]['list']) > 0:
         TEST['request'][1]['data']['account_id'] = res['data']['list'][0]['account_id']
         for folder in res['data']['list'][0]['list']:
-            if folder['folder_type'] == 4:
+            if folder['folder_type'] == 0:
                 TEST['request'][1]['data']['mailbox_path'] = folder['mailbox_path']
                 TEST['request'][1]['data']['folder'] = folder['label']
                 break
@@ -22,7 +22,7 @@ def folderlist_handler(response):
     return True
 
 
-def search_handler(response):
+def list_handler(response):
     print response.text
     res = json.loads(response.text)
     if res['error_code'] != 0 or len(res['data']['list']) == 0:
@@ -31,7 +31,7 @@ def search_handler(response):
 
 
 TEST = {
-        'name': 'Search',
+        'name': 'List',
         'request': [
             {
                 'method': 'POST',
@@ -40,10 +40,9 @@ TEST = {
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/search',
+                'url': '/a/v5/data/message/list',
                 'data': {'ts': int(time.time()),
                          'count': 0,
-                         'query': 'test',
                          'sync_hash': '{}'},
                 'timeout': 60,
             }
@@ -55,7 +54,7 @@ TEST = {
             },
             {
                 'status_code': 200,
-                'hooks': search_handler
+                'hooks': list_handler
             }
         ]
 }
