@@ -40,8 +40,6 @@ def get_input():
 def complete_task(test):
     try:
         for i, request in enumerate(test.TEST['request']):
-            if 'hooks' in test.TEST:
-                test.TEST['request']['hooks'](request)
 
             if '://' not in request['url']:
                 request['url'] = domain + request['url']
@@ -57,6 +55,9 @@ def complete_task(test):
             if request.get('data') is None:
                 request['data'] = {}
             request['data'].update(test_suite.TEST_ENV['global_post_param'])
+
+            if 'hooks' in test.TEST:
+                test.TEST['request']['hooks'](request)
 
             print request
 

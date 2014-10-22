@@ -21,5 +21,6 @@ TEST_ENV = {
         'cases.test3.py',
         'cases.test4.py',
         'cases.test5.py',
+        'cases.test6.py'
     ]
 }
