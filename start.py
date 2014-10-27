@@ -4,7 +4,10 @@ import json
 import importlib
 import argparse
 import gevent
+import time
 import requests
+import smtplib
+from smtplib import SMTPException
 from gevent.threadpool import ThreadPool
 from gevent.queue import Queue
 from gevent import monkey
@@ -19,6 +22,9 @@ global_post_param = {}
 global_query_param = {}
 domain = ''
 tasks = Queue()
+total_task = 0
+success_task = 0
+result = ''
 
 
 def get_input():
@@ -35,6 +41,18 @@ def get_input():
     if input_file is None or threads_count is None:
         print 'Wrong input --help for help'
         exit(1)
+
+
+def send_mail(host, to):
+    sender = 'anurag.shukla@webyog.com'
+    message = 'From: Test Suite <anurag.shukla@webyog.com>\nTo: %s\nSubject: Test Suite %d/%d Passed - %s\n\n%s.\n               '''
+    message = message % (', '.join(to), success_task, total_task, time.strftime('%d %B'), result)
+    try:
+       smtp = smtplib.SMTP(host)
+       smtp.sendmail(sender, to, message)
+       print "Successfully sent email"
+    except SMTPException:
+       print "Error: unable to send email"
 
 
 def complete_task(test):
@@ -86,6 +104,8 @@ def complete_task(test):
     except Exception as e:
         print e
         return False
+    global success_task
+    success_task += 1
     return True
 
 
@@ -95,11 +115,14 @@ def worker():
         test = importlib.import_module(task[:task.find('.py')])
         print '========================================================================'
         print 'Starting Test:', test.TEST['name']
+        global result
         if complete_task(test) is False:
+            result += test.TEST['name'] + '  Failed\n'
             print test.TEST['name'], 'Test Failed'
             return
 
         print test.TEST['name'], 'Test Success'
+        result += test.TEST['name'] + '  Passed\n'
 
 
 if __name__ == '__main__':
@@ -114,11 +137,16 @@ if __name__ == '__main__':
             print 'Init Failed'
     domain = '%s://%s' % (test_suite.TEST_ENV['protocol'], test_suite.TEST_ENV['domain'])
 
+    global total_task
     for i in range(0, len(test_suite.TEST_ENV['testcases'])):
         tasks.put_nowait(test_suite.TEST_ENV['testcases'][i])
+        total_task += 1
 
     pool = ThreadPool(threads_count)
     for _ in range(threads_count):
         pool.spawn(worker)
 
     pool.join()
+
+    if 'smtp_setting' in test_suite.TEST_ENV.keys() and len(test_suite.TEST_ENV['smtp_setting']) > 0:
+        send_mail(test_suite.TEST_ENV['smtp_setting']['host'], test_suite.TEST_ENV['smtp_setting']['to'])
