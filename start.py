@@ -117,12 +117,12 @@ def worker():
         print 'Starting Test:', test.TEST['name']
         global result
         if complete_task(test) is False:
-            result += test.TEST['name'] + '  Failed\n'
+            result += test.TEST['name'] + ':  Failed\n\n'
             print test.TEST['name'], 'Test Failed'
             return
 
         print test.TEST['name'], 'Test Success'
-        result += test.TEST['name'] + '  Passed\n'
+        result += test.TEST['name'] + ':   Passed\n\n'
 
 
 if __name__ == '__main__':
