@@ -45,7 +45,7 @@ def get_input():
 
 def send_mail(host, to):
     sender = 'anurag.shukla@webyog.com'
-    message = 'From: Test Suite <anurag.shukla@webyog.com>\nTo: %s\nSubject: Test Suite %d/%d Passed - %s\n\n%s.\n               '''
+    message = 'From: Test Suite <anurag.shukla@webyog.com>\nTo: %s\nSubject: Test Suite %d/%d Passed - %s\n\n%s\n               '''
     message = message % (', '.join(to), success_task, total_task, time.strftime('%d %B'), result)
     try:
        smtp = smtplib.SMTP(host)
