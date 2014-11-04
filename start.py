@@ -128,7 +128,7 @@ def worker():
 if __name__ == '__main__':
     get_input()
 
-    test_suite = importlib.import_module(input_file[:input_file.find('.py')])
+    test_suite = importlib.import_module(input_file[input_file.rfind('/')+1:input_file.find('.py')])
     print '========================================================================'
     print 'Test Suite Project Name:', test_suite.TEST_ENV['project_name']
 
