@@ -5,6 +5,14 @@ CM test framework
 
 This is a generic REST API test framework written in python.
 
+
+Required modules
+	⁃	curl  https://bootstrap.pypa.io/get-pip.py -o g.py
+	⁃	python g.py
+	⁃	pip install importlib
+	⁃	pip install gevent
+	⁃	pip install requests
+
 To run
 
     python start.py --input testcases.py --threads=1
