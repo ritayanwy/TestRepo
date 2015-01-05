@@ -13,7 +13,7 @@ TEST_ENV = {
     'init_hooks': init_handler,
     'global_info': {},
     'smtp_setting': {'host': '10.1.0.162',
-                      'to': ['anurag.shukla@webyog.com']},
+                      'to': ['anurag.shukla@webyog.com', 'ritayan.das@webyog.com', 'mitchell.thomas@webyog.com']},
     'domain': 'api-gamma.cloudmagic.com',
     'protocol': 'https',
     'testcases': [
