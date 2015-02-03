@@ -119,7 +119,7 @@ def worker():
         if complete_task(test) is False:
             result += test.TEST['name'] + ':  Failed\n\n'
             print test.TEST['name'], 'Test Failed'
-            return
+            continue
 
         print test.TEST['name'], 'Test Success'
         result += test.TEST['name'] + ':   Passed\n\n'
