@@ -1,49 +1,49 @@
-__author__ = 'anurag'
+
 import json
 import time
 
+mailbox_path = None
 
 def folderlist_handler(response):
     print response.text
     res = json.loads(response.text)
     if res['error_code'] != 0:
         return False
-    sync_info = [{'sync_hash': '', 'account_id': -1}]
     if len(res['data']['list']) > 0 and len(res['data']['list'][0]['list']) > 0:
-        sync_info[0]['account_id'] = res['data']['list'][0]['account_id']
+        TEST['request'][1]['data']['account_id'] = res['data']['list'][0]['account_id']
         for folder in res['data']['list'][0]['list']:
-            if folder['is_syncable'] == 1:
-                sync_info[0]['mailbox_path'] = folder['mailbox_path']
-                sync_info[0]['label'] = folder['label']
+            if folder['folder_type'] == 999:
+                TEST['request'][1]['data']['mailbox_path'] = folder['mailbox_path']
+                TEST['request'][2]['data']['mailbox_path'] = folder['mailbox_path']
+                TEST['request'][1]['data']['folder'] = folder['label']
                 break
-        if sync_info[0].get('mailbox_path') is None:
+        if TEST['request'][1]['data'].get('mailbox_path') is None:
             return False
-    TEST['request'][1]['data']['sync_info'] = json.dumps(sync_info)
     return True
 
 
-def sync_handler(response):
+def search_handler(response):
     print response.text
     res = json.loads(response.text)
     if res['error_code'] != 0 or len(res['data']['list']) == 0:
         return False
     account_id = res['data']['list'][0]['account_id']
-    resource_id = res['data']['list'][0]['list'][0]['resource_id']
+    conversation_id = res['data']['list'][0]['conversation_id']
     TEST['request'][2]['data']['account_id'] = account_id
-    TEST['request'][2]['data']['resource_id'] = json.dumps([resource_id])
+    TEST['request'][2]['data']['conversation_id'] = conversation_id
     return True
 
 
 def preview_handler(response):
     print response.text
     res = json.loads(response.text)
-    if res['error_code'] != 0 or len(res['data']['list']) == 0:
+    global sync_info
+    if res['error_code'] != 0 or len(res['data']['list']) != 5:
         return False
     return True
 
-
 TEST = {
-        'name': 'Preview API with resource id',
+        'name': 'sync parent folder previews check',
         'request': [
             {
                 'method': 'POST',
@@ -52,8 +52,11 @@ TEST = {
             },
             {
                 'method': 'POST',
-                'url': '/a/v6/data/message/sync',
-                'data': {},
+                'url': '/a/v6/data/message/search',
+                'data': {'ts': int(time.time()),
+                         'count': 0,
+                         'query': 'sync folder previews check',
+                         'sync_hash': '{}'},
                 'timeout': 60,
             },
             {
@@ -71,7 +74,7 @@ TEST = {
             },
             {
                 'status_code': 200,
-                'hooks': sync_handler
+                'hooks': search_handler
             },
             {
                 'status_code': 200,

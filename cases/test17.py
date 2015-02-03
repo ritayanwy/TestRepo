@@ -1,14 +1,13 @@
-__author__ = 'anurag'
 import json
 import time
 
-
+sync_info = [{'sync_hash': '', 'account_id': -1}]
 def folderlist_handler(response):
     print response.text
     res = json.loads(response.text)
     if res['error_code'] != 0:
         return False
-    sync_info = [{'sync_hash': '', 'account_id': -1}]
+    global sync_info
     if len(res['data']['list']) > 0 and len(res['data']['list'][0]['list']) > 0:
         sync_info[0]['account_id'] = res['data']['list'][0]['account_id']
         for folder in res['data']['list'][0]['list']:
@@ -37,13 +36,16 @@ def sync_handler(response):
 def preview_handler(response):
     print response.text
     res = json.loads(response.text)
+    global sync_info
     if res['error_code'] != 0 or len(res['data']['list']) == 0:
+        return False
+    if res['data']['list'][0]['folder_mailbox_path'][0] != sync_info[0].get('mailbox_path'):
         return False
     return True
 
 
 TEST = {
-        'name': 'Preview API with resource id',
+        'name': 'Preview API folder mailbox path check',
         'request': [
             {
                 'method': 'POST',
@@ -79,6 +81,4 @@ TEST = {
             }
         ]
 }
-
-
 

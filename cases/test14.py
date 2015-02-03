@@ -1,4 +1,3 @@
-__author__ = 'anurag'
 import json
 
 
@@ -7,16 +6,16 @@ def folderlist_handler(response):
     res = json.loads(response.text)
     if res['error_code'] != 0:
         return False
-    sync_info = [{'sync_hash': '', 'account_id': -1}]
+    sync_info = [{'sync_hash': '', 'account_id': -1, 'mailbox_path': '', 'label': ''}]
     if len(res['data']['list']) > 0 and len(res['data']['list'][0]['list']) > 0:
         sync_info[0]['account_id'] = res['data']['list'][0]['account_id']
-        for folder in res['data']['list'][0]['list']:
-            if folder['is_syncable'] == 1:
-                sync_info[0]['mailbox_path'] = folder['mailbox_path']
-                sync_info[0]['label'] = folder['label']
+        folderindex = -1
+        for folders in res['data']['list'][0]['list']:
+            folderindex=folderindex+1
+            if folders['label'] == 'Sync folder':
                 break
-        if sync_info[0].get('mailbox_path') is None:
-            return False
+        sync_info[0]['mailbox_path'] = res['data']['list'][0]['list'][folderindex]['mailbox_path']
+        sync_info[0]['label'] = res['data']['list'][0]['list'][folderindex]['label']
     TEST['request'][1]['data']['sync_info'] = json.dumps(sync_info)
     return True
 
@@ -24,13 +23,13 @@ def folderlist_handler(response):
 def sync_handler(response):
     print response.text
     res = json.loads(response.text)
-    if res['error_code'] != 0 or len(res['data']['list']) == 0:
+    if len (res['data']['list'][0]['list']) <= 0:
         return False
     return True
 
 
 TEST = {
-        'name': 'Folder Sync API',
+        'name': 'Sync API - sync folder syncing check',
         'request': [
             {
                 'method': 'POST',
@@ -55,6 +54,3 @@ TEST = {
             }
         ]
 }
-
-
-

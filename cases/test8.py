@@ -35,12 +35,12 @@ TEST = {
         'request': [
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/getfolderlist',
+                'url': '/a/v6/data/message/getfolderlist',
                 'timeout': 60
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/list',
+                'url': '/a/v6/data/message/list',
                 'data': {'ts': int(time.time()),
                          'count': 0,
                          'sync_hash': '{}'},

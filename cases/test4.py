@@ -18,6 +18,7 @@ def folderlist_handler(response):
         if sync_info[0].get('mailbox_path') is None:
             return False
     TEST['request'][1]['data']['sync_info'] = json.dumps(sync_info)
+    print sync_info
     return True
 
 
@@ -46,18 +47,18 @@ TEST = {
         'request': [
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/getfolderlist',
+                'url': '/a/v6/data/message/getfolderlist',
                 'timeout': 60
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/sync',
+                'url': '/a/v6/data/message/sync',
                 'data': {},
                 'timeout': 60,
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/get',
+                'url': '/a/v6/data/message/get',
                 'data': {},
                 'timeout': 60,
             }

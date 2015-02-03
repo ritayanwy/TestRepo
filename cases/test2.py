@@ -26,7 +26,7 @@ TEST = {
         'request': [
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/getfolderlist',
+                'url': '/a/v6/data/message/getfolderlist',
                 'timeout': 60
             },
             {

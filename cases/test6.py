@@ -51,18 +51,18 @@ TEST = {
         'request': [
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/getfolderlist',
+                'url': '/a/v6/data/message/getfolderlist',
                 'timeout': 60
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/sync',
+                'url': '/a/v6/data/message/sync',
                 'data': {},
                 'timeout': 60,
             },
             {
                 'method': 'POST',
-                'url': '/a/v5/data/message/preview',
+                'url': '/a/v6/data/message/preview',
                 'data': {'ts': int(time.time()),
                          'show_all': 1},
                 'timeout': 60,

@@ -16,10 +16,13 @@ TEST = {
         'request': [
         {
                 'method': 'POST',
-                'url': '/k/v5/user/session_create',
+                'url': '/k/v6/user/session_create?ct=pi&cv=6.5.0&pv=8.2.2',
                 'timeout': 60,
-                'data': {'email': 'anurag.shukla@webyog.com',
-                         'password': 'AAXXAA'}
+                'data': {'email': 'webyogiritayan@gmail.com',
+                         'password': 'webyog',
+                         'udi':'EE5004D15CC2627B87937DE8CFB6B7DE41E56F5F',
+                         'model_name': 'ritayans ipad'
+                         }
         }
         ],
         'response': [
