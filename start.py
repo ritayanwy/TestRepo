@@ -13,7 +13,7 @@ from gevent.queue import Queue
 from gevent import monkey
 monkey.patch_all(thread=False)
 
-environ['TERM'] = 'dumb'
+os.environ['TERM'] = 'dumb'
 input_file = None
 threads_count = 0
 
