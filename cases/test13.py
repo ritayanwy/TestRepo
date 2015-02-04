@@ -34,7 +34,6 @@ def sync_handler2(response):
         return False
     if len (res['data']['list'][0]['list']) <= 0:
         return False
-
     return True
 
 

@@ -20,7 +20,7 @@ TEST = {
                 'timeout': 60,
                 'data': {'email': 'webyogiritayan@gmail.com',
                          'password': 'webyog',
-                         'udi':'EE5004D15CC2627B87937DE8CFB6B7DE41E56F5F',
+                         'udi':'EE5004D15CC2627B87937DE8CFB6B7DE41E56F5',
                          'model_name': 'ritayans ipad'
                          }
         }

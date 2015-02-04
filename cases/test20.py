@@ -55,7 +55,7 @@ TEST = {
                 'url': '/a/v6/data/message/search',
                 'data': {'ts': int(time.time()),
                          'count': 0,
-                         'query': 'trash conversation previews check',
+                         'query': '1357924680',
                          'sync_hash': '{}'},
                 'timeout': 60,
             },

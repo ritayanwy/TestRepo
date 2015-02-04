@@ -6,7 +6,7 @@ def init_handler(global_headers, global_post_param, global_query_param):
 
 
 TEST_ENV = {
-    'project_name': 'CloudMagic Gamma - Sync APIs',
+    'project_name': 'CloudMagic APIs',
     'global_headers': {},
     'global_post_param': {},
     'global_query_param': {},
@@ -14,7 +14,7 @@ TEST_ENV = {
     'global_info': {},
     'smtp_setting': {'host': '10.1.0.162',
                       'to': ['anurag.shukla@webyog.com', 'ritayan.das@webyog.com', 'mitchell.thomas@webyog.com']},
-    'domain': 'api-gamma.cloudmagic.com',
+    'domain': 'api.cloudmagic.com',
     'protocol': 'https',
     'testcases': [
         'cases.login.py',
@@ -39,5 +39,24 @@ TEST_ENV = {
         'cases.test19.py',
         'cases.test20.py',
         'cases.test21.py',
+        'cases.test23.py',
+        'cases.test25.py',
+        'cases.test26.py',
+        'cases.test27.py',
+        'cases.test28.py',
+        'cases.test29.py',
+        'cases.test30.py',
+        'cases.test31.py',
+        'cases.test32.py',
+        'cases.test33.py',
+        'cases.test34.py',
+        'cases.test35.py',
+        'cases.test36.py',
+        'cases.test37.py',
+        'cases.test38.py',
+        'cases.test39.py',
+        'cases.test40.py',
+        'cases.test41.py',
+        'cases.test42.py',
     ]
 }
