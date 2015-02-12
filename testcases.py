@@ -9,7 +9,7 @@ TEST_ENV = {
     'project_name': 'CloudMagic APIs',
     'global_headers': {},
     'global_post_param': {},
-    'global_query_param': {},
+    'global_query_param': {'cv':'6.0.1'},
     'init_hooks': init_handler,
     'global_info': {},
     'smtp_setting': {'host': '10.1.0.162',
