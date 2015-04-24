@@ -23,6 +23,7 @@ def folderlist_handler(response):
 def sync_handler(response):
     print response.text
     res = json.loads(response.text)
+    print len (res['data']['list'][0]['list'])
     if len (res['data']['list'][0]['list']) <= 0:
         return False
     return True

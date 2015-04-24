@@ -16,12 +16,12 @@ TEST = {
         'request': [
         {
                 'method': 'POST',
-                'url': '/k/v6/user/session_create?ct=pi&cv=6.5.0&pv=8.2.2',
+                'url': '/k/v6/user/session_create?ct=ti&cv=6.4.7&pv=8.1.3',
                 'timeout': 60,
                 'data': {'email': 'webyogiritayan@gmail.com',
                          'password': 'webyog',
-                         'udi':'EE5004D15CC2627B87937DE8CFB6B7DE41E56F5',
-                         'model_name': 'ritayans ipad'
+                         'udi':'EE5004D15CC2627B87937DE8CFB6B7DE41E56F5F',
+                         'model_name': 'automation device'
                          }
         }
         ],

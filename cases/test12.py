@@ -18,14 +18,13 @@ def folderlist_handler(response):
     sync_folder = [[0 for column_no in range(3)] for row_no in range(len(res['data']['list']))]
     for account in res['data']['list']:
         for folder in account["list"]:
-            if folder ['folder_type'] == 0:
+            if folder ['folder_type'] == 0:   #inbox
                 sync_folder[account_no].append(folder['id'])
-                print sync_folder[account_no][0]
-            if folder ['folder_type'] == 5:
+            if folder ['folder_type'] == 5:   #starred
                 sync_folder[account_no].append(folder['id'])
-            if folder ['folder_type'] == 1:
+            if folder ['folder_type'] == 1:   #sentmail
                 sync_folder[account_no].append(folder['id'])
-        account_no=account_no+1
+        account_no = account_no+1
     return True
 
 
