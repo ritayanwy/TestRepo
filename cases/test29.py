@@ -5,7 +5,7 @@ def reasonsapi_handler_pad(response):
     res = json.loads(response.text)
     if res['error_code'] != 0:
         return False
-    if len(res['data']['url_list'])!= 7:
+    if len(res['data']['url_list'])!= 1:
         return False
     return True
 

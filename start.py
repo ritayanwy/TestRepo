@@ -74,6 +74,11 @@ def complete_task(test):
                 request['data'] = {}
             request['data'].update(test_suite.TEST_ENV['global_post_param'])
 
+            if request.get('data_binary') is not None:
+                request['data'] = request.get('data_binary')
+                del request['data_binary']
+
+
             if 'hooks' in test.TEST:
                 test.TEST['request']['hooks'](request)
 

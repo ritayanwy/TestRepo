@@ -1,19 +1,5 @@
 import json
 
-global ProfilePicLink
-
-def profilepic_handler(response):
-    print response.text
-    res = json.loads(response.text)
-    if res['error_code'] != 0:
-        return False
-    global ProfilePicLink
-    ProfilePicLink = res['data']['profile_pic_urls'][0]
-    TEST['request'][1]['data']['profile_pic'] = ProfilePicLink
-    if ProfilePicLink == None:
-        return False
-    return True
-
 def profileinfoset_handler(response):
     print response.text
     res = json.loads(response.text)
@@ -21,48 +7,72 @@ def profileinfoset_handler(response):
         return False
     return True
 
+def changeget_handler1(response):
+    print response.text
+    res = json.loads(response.text)
+    if res['error_code'] != 0:
+        return False
+    print res['data']['hash']
+    TEST['request'][3]['data']['hash'] = res['data']['hash']
+    return True
+
 def profileinfoget_handler(response):
     print response.text
     res = json.loads(response.text)
     if res['error_code'] != 0:
         return False
-    global ProfilePicLink
-    print res['data']['profile_pic']
-    if ProfilePicLink != res['data']['profile_pic']:
+    if res['data']['nickname']!= 'TestAccount' or res['data']['profile_pic']!= 'arbitrary string':
+        return False
+    return True
+
+def changeget_handler2(response):
+    print response.text
+    res = json.loads(response.text)
+    if res['error_code'] != 0:
+        return False
+    if len(res['data']['change']) == 0:
         return False
     return True
 
 TEST = {
-    'name': 'ProfilePic set get from server check',
+    'name': 'profileinfo set get ChangeGet check',
     'request': [
-        {   'method': 'POST',
-            'url': '/k/v6/profile/get_available_profile_pics',
-        },
         {   'method': 'POST',
             'url': '/k/v6/profileinfo/set',
             'data': {
                     'nickname': 'TestAccount',
+                    'profile_pic': 'arbitrary string',
                     }
+        },
+        {
+                'method': 'POST',
+                'url': '/k/v6/change/get'
         },
         {   'method': 'POST',
             'url': '/k/v6/profileinfo/get',
+        },
+        {
+                'method': 'POST',
+                'url': '/k/v6/change/get',
+                'data': { }
         }
     ],
         'response': [
-            {
-                'status_code': 200,
-                'hooks': profilepic_handler
-            },
             {
                 'status_code': 200,
                 'hooks': profileinfoset_handler
             },
             {
                 'status_code': 200,
+                'hooks': changeget_handler1
+            },
+            {
+                'status_code': 200,
                 'hooks': profileinfoget_handler
+            },
+            {
+                'status_code': 200,
+                'hooks': changeget_handler2
             }
     ]
-
-
 }
-
